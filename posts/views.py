@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 
 from django.http  import JsonResponse
 from django.views import View
+from django.db    import transaction
 
 from posts.models import Post
 from users.utils  import login_decorator
@@ -49,47 +50,6 @@ class PostView(View):
 
         except ValueError:
             return JsonResponse({'message':'VALUE_ERROR'}, status=200)
-    
-    @login_decorator
-    def patch(self, request):
-        try:
-            data    = json.loads(request.body)
-            user    = request.user
-            post_id = request.GET.get('id')
-            content = data['content']
-
-            if not Post.objects.filter(id=post_id, user=user).exists():
-                return JsonResponse({'message':'INVALID_POST_ID'}, status=404)
-
-            post = Post.objects.get(id=post_id, user=user)
-
-            post.content = content
-            post.save()
-            return JsonResponse({'data': post.content}, status=200)
-
-        except JSONDecodeError:
-            return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
-        except ValueError:
-            return JsonResponse({'message':'VALUE_ERROR'}, status=400)
-        except KeyError:
-            return JsonResponse({'message':'KEY_ERROR'}, status=400)
-
-    @login_decorator
-    def delete(self, request):
-        try:
-            user    = request.user
-            post_id = request.GET.get('id')
-
-            if not Post.objects.filter(id=post_id, user=user).exists():
-                return JsonResponse({'message':'INVALID_POST_ID'}, status=404)
-
-            post = Post.objects.get(id=post_id, user=user)
-            
-            post.delete()
-            return JsonResponse({'message': f'post_id {post_id} is DELETED'}, status=200)
-    
-        except ValueError:
-            return JsonResponse({'message':'VALUE_ERROR'}, status=400)
 
 class PostDetailView(View):
     def get(self, request, post_id):
@@ -108,5 +68,41 @@ class PostDetailView(View):
 
         except Post.DoesNotExist:
             return JsonResponse({'message' : 'PRODUCT_NOT_FOUND'}, status=404)
-        except ValueError:
-            return JsonResponse({'message' : 'VALUE_ERROR'}, status=400)
+
+    @login_decorator
+    @transaction.atomic
+    def patch(self, request, post_id):
+        try:
+            data    = json.loads(request.body)
+            user    = request.user
+            title   = data['title']
+            content = data['content']
+
+            if not Post.objects.filter(id=post_id, user=user).exists():
+                return JsonResponse({'message':'INVALID_POST_ID'}, status=404)
+
+            post = Post.objects.get(id=post_id, user=user)
+
+            post.content = content
+            post.title   = title
+            post.save()
+            return JsonResponse({'data':'UPDATED'}, status=200)
+
+        except JSONDecodeError:
+            return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
+        except KeyError:
+            return JsonResponse({'message':'KEY_ERROR'}, status=400)
+
+    @login_decorator
+    def delete(self, request, post_id):
+
+        user = request.user
+
+        if not Post.objects.filter(id=post_id, user=user).exists():
+            return JsonResponse({'message':'INVALID_POST_ID'}, status=404)
+
+        post = Post.objects.get(id=post_id, user=user)
+            
+        post.delete()
+        return JsonResponse({'message': f'post_id {post_id} is DELETED'}, status=200)
+    
