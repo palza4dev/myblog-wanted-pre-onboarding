@@ -30,15 +30,13 @@ class PostView(View):
     
     def get(self, request):
         try:
-            limit  = int(request.GET.get('limit', 100))
+            limit  = int(request.GET.get('limit', 10))
             offset = int(request.GET.get('offset', 0))
 
-            limit = offset + limit
-
-            if limit - offset > 100:
+            if limit > 10:
                 return JsonResponse({'message':'TOO_MUCH_LIMIT'}, status=400)
 
-            posts  = Post.objects.all()[offset:limit]
+            posts  = Post.objects.all()[offset:offset+limit]
 
             result = [{
                 'post_id'    : post.id,
