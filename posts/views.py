@@ -67,7 +67,7 @@ class PostDetailView(View):
             return JsonResponse({'data': data}, status=200)
 
         except Post.DoesNotExist:
-            return JsonResponse({'message' : 'PRODUCT_NOT_FOUND'}, status=404)
+            return JsonResponse({'message' : 'POST_NOT_FOUND'}, status=404)
 
     @login_decorator
     @transaction.atomic
@@ -86,7 +86,7 @@ class PostDetailView(View):
             post.content = content
             post.title   = title
             post.save()
-            return JsonResponse({'data':'UPDATED'}, status=200)
+            return JsonResponse({'result':'UPDATED'}, status=200)
 
         except JSONDecodeError:
             return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)

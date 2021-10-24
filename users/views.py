@@ -18,10 +18,10 @@ class SignUpView(View):
             password = data['password']
 
             if User.objects.filter(nickname=nickname).exists():
-                return JsonResponse({'message': 'ERROR_ID_ALREADY_EXIST'}, status=400)
+                return JsonResponse({'message': 'NICKNAME_ALREADY_EXIST'}, status=400)
 
             if User.objects.filter(email=email).exists():
-                return JsonResponse({'message': 'ERROR_EMAIL_ALREADY_EXIST'}, status=400)
+                return JsonResponse({'message': 'EMAIL_ALREADY_EXIST'}, status=400)
 
             if not re.match(r"^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
                 return JsonResponse({'message': 'INVALID_EMAIL'}, status=404)
@@ -37,7 +37,9 @@ class SignUpView(View):
             )
 
             return JsonResponse({'message': 'SUCCESS'}, status=200)
-
+            
+        except JSONDecodeError:
+            return JsonResponse({'message': 'JSON_DECODE_ERROR'})
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=400)
 
@@ -62,6 +64,5 @@ class LoginView(View):
 
         except JSONDecodeError:
             return JsonResponse({'message': 'JSON_DECODE_ERROR'})
-
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=400)
