@@ -58,7 +58,7 @@
 
 ### Unit Test
   - tests.py에 테스트 코드 작성
-  - 함수 단위별 success, fail case 단위 테스트 완료
+  - 함수 단위별 success, fail case 테스트 완료
 
 
 ### Integration Test
