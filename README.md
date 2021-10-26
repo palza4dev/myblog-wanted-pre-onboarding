@@ -56,6 +56,8 @@
   - 글 작성, 글 목록 조회를 위한 PostView 작성
   - 글 내용 확인, 수정, 삭제를 위한 PostDetailView 작성
 
+### Unit Test
+  - tests.py에 테스트 코드 작성
 
 
 ### Integration Test
