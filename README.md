@@ -63,7 +63,7 @@
 
 ### Integration Test
   - Postman과 Httpie 활용
-  - Postman Document [링크](https://web.postman.co/documentation/17676214-e908a12e-1170-49b0-be36-a9f8ce0caf10/publish?workspaceId=d421537f-5bf1-4172-a044-aea332407b9a)
+  - Postman Document [링크](https://documenter.getpostman.com/view/17676214/UV5cAazB)
 
 <br>
 
