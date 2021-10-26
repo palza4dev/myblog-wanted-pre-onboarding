@@ -63,6 +63,6 @@ class LoginView(View):
             return JsonResponse({'message': 'INVALID_PASSWORD'}, status=401)
 
         except JSONDecodeError:
-            return JsonResponse({'message': 'JSON_DECODE_ERROR'})
+            return JsonResponse({'message': 'JSON_DECODE_ERROR'}, status=400)
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=400)

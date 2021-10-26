@@ -82,6 +82,18 @@ class SignUpTest(TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json(),{'message':'INVALID_PASSWORD'})
 
+    def test_sign_up_post_key_error_fail(self):
+        client = Client()
+        data = {
+            'nickname' : 'jungjung',
+            'email'    : 'jung2@gmail.com',
+            'password' : '123111111'
+        }
+        response = client.post('/users/signup', data=data, content_type='application/json')
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(),{'message':'KEY_ERROR'})
+
 class LogInTest(TestCase):
     def setUp(self):
         user = User.objects.create(
@@ -131,3 +143,14 @@ class LogInTest(TestCase):
         
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.json(),{'message':'INVALID_PASSWORD'})
+
+    def test_log_in_post_key_error_fail(self):
+        client = Client()
+        data = {
+            'password' : 'm111111!'
+        }
+        response = client.post('/users/login', data=data, content_type='application/json')
+        token    = self.token
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(),{'message':'KEY_ERROR'})
