@@ -105,4 +105,3 @@ class PostDetailView(View):
             
         post.delete()
         return JsonResponse({'message': f'post_id {post_id} is DELETED'}, status=200)
-    
