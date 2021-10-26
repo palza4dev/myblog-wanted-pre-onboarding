@@ -20,14 +20,14 @@
 
 ## 프로젝트 구조와 구현 방법
 
-- myblog 프로젝트 개요
+### myblog 프로젝트 개요
 
   - Python을 기반으로 Django 프레임워크를 활용한 게시글 CRUD 기능 REST API 개발
   - 유저 생성과 인증, 인가 기능 개발
 
   
 
-- DB와 모델링
+### DB와 모델링
 
   - sqlite3 사용
   - 유저 정보는 이름, 닉네임, 이메일, 패스워드 관리
@@ -35,13 +35,13 @@
 
   
 
-- core app
+### core app
 
   - 모든 데이터의 생성과 수정 이력관리를 위한 추상화 모델 TimeStampModel class 작성
 
     
 
-- users app
+### users app
 
   - 유저 회원가입을 위한 SignUpView class 작성 (bcrypt로 비밀번호 암호화)
 
@@ -51,14 +51,14 @@
 
     
 
-- posts app 
+### posts app 
 
   - 글 작성, 글 목록 조회를 위한 PostView 작성
   - 글 내용 확인, 수정, 삭제를 위한 PostDetailView 작성
 
 
 
-- Integration Test
+### Integration Test
   - Postman과 Httpie 활용
   - Postman Document [링크](https://web.postman.co/documentation/17676214-e908a12e-1170-49b0-be36-a9f8ce0caf10/publish?workspaceId=d421537f-5bf1-4172-a044-aea332407b9a)
 
