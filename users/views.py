@@ -36,10 +36,10 @@ class SignUpView(View):
                 password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
             )
 
-            return JsonResponse({'message': 'SUCCESS'}, status=200)
+            return JsonResponse({'message': 'SUCCESS'}, status=201)
             
         except JSONDecodeError:
-            return JsonResponse({'message': 'JSON_DECODE_ERROR'})
+            return JsonResponse({'message': 'JSON_DECODE_ERROR'}, status=400)
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=400)
 
@@ -60,7 +60,7 @@ class LoginView(View):
                 token = jwt.encode({'id': user.id}, SECRET_KEY, algorithm=ALGORITHM)
                 return JsonResponse({'token':token}, status=200)
                 
-            return JsonResponse({'message': 'INVALID_USER_PASSWORD'}, status=401)
+            return JsonResponse({'message': 'INVALID_PASSWORD'}, status=401)
 
         except JSONDecodeError:
             return JsonResponse({'message': 'JSON_DECODE_ERROR'})
