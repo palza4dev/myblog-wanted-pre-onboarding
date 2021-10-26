@@ -6,7 +6,7 @@
 
 - 과제 안내 [링크](https://wecode.notion.site/x-2f1edca34653419d8e109df1816197c2)
 
-
+<br>
 
 ## 사용 기술
 
@@ -16,7 +16,7 @@
 - PyJWT 2.3.0
 - bcrypt 3.2.0
 
-
+<br>
 
 ## 프로젝트 구조와 구현 방법
 
@@ -43,24 +43,26 @@
 
 - users app
 
-  - 유저 회원가입을 위한 SignUpView 작성 (bcrypt로 비밀번호 암호화)
+  - 유저 회원가입을 위한 SignUpView class 작성 (bcrypt로 비밀번호 암호화)
 
-  - 유저 로그인을 위한 LogInView 작성 (JWT 토큰 생성)
+  - 유저 로그인을 위한 LogInView class 작성 (JWT 토큰 생성)
 
-  - 유저 인가를 위한 데코레이터를 utils.py에 작성
+  - 유저 인가를 위한 login_decorator를 utils.py에 작성
 
     
 
 - posts app 
 
-  - 글 작성과 글 목록 조회를 위한 PostView 작성
+  - 글 작성, 글 목록 조회를 위한 PostView 작성
   - 글 내용 확인, 수정, 삭제를 위한 PostDetailView 작성
 
 
 
-- Integration Test 완료
+- Integration Test
+  - Postman과 Httpie 활용
+  - Postman Document [링크](https://web.postman.co/documentation/17676214-e908a12e-1170-49b0-be36-a9f8ce0caf10/publish?workspaceId=d421537f-5bf1-4172-a044-aea332407b9a)
 
-
+<br>
 
 ## API 명세 - 엔드포인트와 호출&응답 예시
 
@@ -83,15 +85,20 @@
       "message": "SUCCESS"
   }
   ```
-  - 에러 메시지
+   - 에러 메시지
+ 
   ```bash
-  중복된 닉네임 입력시 => { "message": "NICKNAME_ALREADY_EXIST"}
+  중복된 닉네임 입력시
+  => { "message": "NICKNAME_ALREADY_EXIST"}
   
-  중복된 이메일 입력시 => { "message": "EMAIL_ALREADY_EXIST"}
+  중복된 이메일 입력시
+  => { "message": "EMAIL_ALREADY_EXIST"}
   
-  이메일 양식 오류   => { "message": "INVALID_EMAIL"}
+  이메일 양식 오류
+  => { "message": "INVALID_EMAIL"}
   
-  비밀번호 양식 오류  => { "message": "INVALID_PASSWORD"}
+  비밀번호 양식 오류
+  => { "message": "INVALID_PASSWORD"}
   ```
 
   
@@ -113,9 +120,11 @@
   - 에러 메시지
 
   ```bash
-  이메일 정보가 틀렸을때 => { "message": "INVALID_EMAIL"}
+  이메일 정보가 틀렸을때
+  => { "message": "INVALID_EMAIL"}
   
-  패스워드가 틀렸을때   => { "message": "INVALID_USER_PASSWORD"}
+  패스워드가 틀렸을때
+  => { "message": "INVALID_USER_PASSWORD"}
   
   ```
 
@@ -177,7 +186,8 @@
   - 에러 메시지
 
   ```bash
-  limit 값이 10을 넘으면 => {"message" : "TOO_MUCH_LIMIT"}
+  limit 값이 10을 넘으면
+  => {"message" : "TOO_MUCH_LIMIT"}
   ```
 
 
@@ -203,7 +213,8 @@
   - 에러 메시지
 
   ```bash
-  해당 post가 존재하지 않을 때 => {"message" : "POST_NOT_FOUND"}
+  해당 post가 존재하지 않을 때
+  => {"message" : "POST_NOT_FOUND"}
   ```
 
 
@@ -226,7 +237,8 @@
   - 에러 메시지
 
   ```bash
-  해당 유저가 작성한 게시글이 아닐때 => {"message" : "INVALID_POST_ID"}
+  해당 유저가 작성한 게시글이 아닐때
+  => {"message" : "INVALID_POST_ID"}
   ```
 
 
@@ -245,9 +257,6 @@
   - 에러 메시지
 
   ```bash
-  해당 유저가 작성한 게시글이 아닐때 => {"message" : "INVALID_POST_ID"}
+  해당 유저가 작성한 게시글이 아닐때
+  => {"message" : "INVALID_POST_ID"}
   ```
-
-  
-
-  
