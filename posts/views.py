@@ -49,7 +49,7 @@ class PostView(View):
             return JsonResponse({'count': len(posts), 'data':result}, status=200)
 
         except ValueError:
-            return JsonResponse({'message':'VALUE_ERROR'}, status=200)
+            return JsonResponse({'message':'VALUE_ERROR'}, status=400)
 
 class PostDetailView(View):
     def get(self, request, post_id):
@@ -86,7 +86,7 @@ class PostDetailView(View):
             post.content = content
             post.title   = title
             post.save()
-            return JsonResponse({'result':'UPDATED'}, status=200)
+            return JsonResponse({'message':'UPDATED'}, status=200)
 
         except JSONDecodeError:
             return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)

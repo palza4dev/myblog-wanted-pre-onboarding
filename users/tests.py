@@ -19,7 +19,7 @@ class SignUpTest(TestCase):
     
     def test_sign_up_post_success(self):
         client = Client()
-        data = {
+        data   = {
             'name'     : '정우성',
             'nickname' : 'jungjung',
             'email'    : 'jung2@gmail.com',
@@ -32,7 +32,7 @@ class SignUpTest(TestCase):
     
     def test_sign_up_post_duplicated_nickname_fail(self):
         client = Client()
-        data = {
+        data   = {
             'name'     : '정우성',
             'nickname' : 'jung',
             'email'    : 'jung2@gmail.com',
@@ -45,7 +45,7 @@ class SignUpTest(TestCase):
 
     def test_sign_up_post_duplicated_email_fail(self):
         client = Client()
-        data = {
+        data   = {
             'name'     : '정우성',
             'nickname' : 'jungjung',
             'email'    : 'jung1@gmail.com',
@@ -58,7 +58,7 @@ class SignUpTest(TestCase):
     
     def test_sign_up_post_email_validation_fail(self):
         client = Client()
-        data = {
+        data   = {
             'name'     : '정우성',
             'nickname' : 'jungjung',
             'email'    : 'jung2gmail.com',
@@ -71,7 +71,7 @@ class SignUpTest(TestCase):
 
     def test_sign_up_post_password_validation_fail(self):
         client = Client()
-        data = {
+        data   = {
             'name'     : '정우성',
             'nickname' : 'jungjung',
             'email'    : 'jung2@gmail.com',
@@ -84,7 +84,7 @@ class SignUpTest(TestCase):
 
     def test_sign_up_post_key_error_fail(self):
         client = Client()
-        data = {
+        data   = {
             'nickname' : 'jungjung',
             'email'    : 'jung2@gmail.com',
             'password' : '123111111'
@@ -110,7 +110,7 @@ class LogInTest(TestCase):
 
     def test_log_in_post_success(self):
         client = Client()
-        data = {
+        data   = {
             'email'    : 'jung1@gmail.com',
             'password' : 'm111111!'
         }
@@ -122,7 +122,7 @@ class LogInTest(TestCase):
     
     def test_log_in_post_invalid_email_fail(self):
         client = Client()
-        data = {
+        data   = {
             'email'    : 'jung777@gmail.com',
             'password' : 'm111111!'
         }
@@ -134,7 +134,7 @@ class LogInTest(TestCase):
 
     def test_log_in_post_invalid_password_fail(self):
         client = Client()
-        data = {
+        data   = {
             'email'    : 'jung1@gmail.com',
             'password' : 'wrong!!!'
         }
@@ -146,7 +146,7 @@ class LogInTest(TestCase):
 
     def test_log_in_post_key_error_fail(self):
         client = Client()
-        data = {
+        data   = {
             'password' : 'm111111!'
         }
         response = client.post('/users/login', data=data, content_type='application/json')
