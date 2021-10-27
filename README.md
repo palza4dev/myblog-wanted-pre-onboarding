@@ -78,10 +78,10 @@
   ```bash
   POST http://localhost:8000/users/signup
   -d {
-      "name" : "아이유",
-      "nickname" : "helloiuiu",
-      "email": "iuiuiu@gmail.com",
-      "password": "m111111!!"
+      "name" : "이름",
+      "nickname" : "닉네임",
+      "email": "email@sample.com",
+      "password": "test1234!!"
   }
   
   => {
@@ -89,7 +89,7 @@
   }
   ```
    - 에러 메시지
- 
+
   ```bash
   중복된 닉네임 입력시
   => { "message": "NICKNAME_ALREADY_EXIST"}
@@ -111,8 +111,8 @@
   ```bash
   POST http://localhost:8000/users/login
   -d {
-      "email": "iuiuiu@gmail.com",
-      "password": "m111111!!"
+      "email": "email@sample.com",
+      "password": "test1234!!"
   }
   
   => {
